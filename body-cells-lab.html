@@ -26,7 +26,8 @@ footer{text-align:center;color:var(--mu);font-size:12px;padding:12px}
 </head>
 <body>
 <div class="w">
-<header><h1>🔬 معمل الخلية وأجهزة الجسم</h1><div class="bar"><span>⭐ النقاط: <b id="pts">0</b></span><span>✅ المحطات: <b id="prog">0</b></span></div></header>
+<header><h1>🔬 معمل الخلية وأجهزة الجسم</h1><div class="bar"><span>⭐ النقاط: <b id="pts">0</b></span><span>✅ المحطات: <b id="prog">0</b></span><button id="rb" style="margin:0;padding:3px 10px;background:#fff;color:#17143b">📋 تقريري</button></div><input id="nm" placeholder="✏️ اكتبي اسمك هنا" style="margin-top:8px;width:100%;box-sizing:border-box;border:0;border-radius:10px;padding:8px;font:inherit"></header>
+<div id="rep" class="card bd" style="display:none;padding:14px"></div>
 <div id="list"></div>
 <footer>تصميم المعلمة سامية الشهري · علوم سادس ابتدائي</footer>
 </div>
@@ -119,6 +120,15 @@ function rt(el,c,fin){let t0=0,tm,n=0,best=9e9,s=0;el.innerHTML=`<b>${c.t}</b><p
   else{const ms=Math.round(performance.now()-t0);best=Math.min(best,ms);s=0;d.style.background="";d.textContent=ms+" ميلي ثانية، اضغطي للمحاولة";if(++n==3){d.textContent="أفضل نتيجة: "+best+" ميلي ثانية (المعتاد بين 200 و300)";d.onclick=null;fin(2)}}}}
 function hr(el,c,fin){const D=[["🪑 راحة",70,16],["🚶 مشي",95,22],["🏃 جري",150,40]],seen=new Set();el.innerHTML=`<b>${c.t}</b><br>`;const o=document.createElement("div");o.className="box";o.textContent="اختاري نشاطاً لترى الأثر (قيم تقريبية)";
  D.forEach(([n,h,r],j)=>el.appendChild(B(n,()=>{o.innerHTML=`🫀 النبض: <b>${h}</b> نبضة/د<div style="background:var(--p);height:8px;border-radius:8px;width:${h/1.6}%"></div>🫁 التنفس: <b>${r}</b> مرة/د<div style="background:var(--g);height:8px;border-radius:8px;width:${r*2}%"></div>`;seen.add(j);if(seen.size==3)fin(2)})));el.appendChild(o)}
+const TEACHER_PHONE="";// رقم المعلمة بصيغة دولية بدون + مثل 9665XXXXXXXX
+const rtxt=()=>"تقرير معمل الخلية وأجهزة الجسم\nالطالبة: "+(st.name||"(لم تكتب اسمها)")+"\nالتاريخ: "+new Date().toLocaleDateString("ar-SA")+"\nالنقاط: "+st.pts+"\nالمحطات المنجزة: "+Object.keys(st.done).length+" من "+S.length+"\n"+S.map((s,i)=>(st.done[i]?"✅ ":"⏳ ")+s.t+(st.tr[i]?" — "+(st.tr[i]=="e"?"مسار إثرائي":"مسار علاجي"):"")).join("\n")+"\nالمدرسة الابتدائية السابعة والأربعون";
+const need=()=>{if(st.name&&st.name.trim())return false;$("nm").placeholder="اكتبي اسمك أولاً!";$("nm").focus();scrollTo(0,0);return true};
+function rp(){const r=$("rep");if(r.style.display=="none")return;r.innerHTML="<b>📋 تقريري</b>";const p=document.createElement("pre");p.style.cssText="white-space:pre-wrap;font-family:inherit;background:var(--pl);border-radius:12px;padding:10px";p.textContent=rtxt();r.appendChild(p);
+ r.appendChild(B("📲 إرسال إلى المعلمة",()=>{if(need())return;window.open("https://wa.me/"+TEACHER_PHONE+"?text="+encodeURIComponent(rtxt()),"_blank")},"pri"));
+ r.appendChild(B("📄 نسخ التقرير",()=>{if(need())return;try{navigator.clipboard.writeText(rtxt())}catch(e){}}))}
+$("nm").value=st.name||"";$("nm").oninput=e=>{st.name=e.target.value;save();rp()};
+$("rb").onclick=()=>{const r=$("rep");r.style.display=r.style.display=="none"?"block":"none";rp()};
+const _r=render;render=function(){_r();rp()};
 render();
 </script>
 </body>
