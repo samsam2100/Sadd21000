@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>معمل الخلية وأجهزة الجسم | علوم سادس ابتدائي</title>
+<style>
+:root{--bg:#f5f6fc;--c:#fff;--ink:#20213a;--mu:#73758e;--ln:#e8e8f2;--p:#7657e8;--pl:#f0edff;--g:#15966b;--gl:#e8f7f0;--r:#d64d68;--rl:#fff0f2;--al:#fff8eb;box-sizing:border-box;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#11102b;--c:#1c1a45;--ink:#f0eeff;--mu:#b9b7d8;--ln:#34316b;--pl:#2b2766;--gl:#12372c;--rl:#43202b;--al:#3d2f12}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,'Segoe UI',sans-serif;line-height:1.7}
+.w{max-width:760px;margin:auto;padding:12px}
+header{background:linear-gradient(120deg,#17143b,#4b3aa8);color:#fff;border-radius:18px;padding:16px}
+h1{font-size:19px;margin:0}.bar{display:flex;gap:14px;margin-top:6px;font-size:13px}
+.card{background:var(--c);border:1px solid var(--ln);border-radius:16px;margin:10px 0;overflow:hidden}
+.hd{display:flex;gap:10px;align-items:center;padding:14px;cursor:pointer;font-weight:700}
+.hd small{display:block;color:var(--mu);font-weight:400;font-size:12px}.bd{padding:0 14px 14px}
+button{font:inherit;cursor:pointer;border:1px solid var(--ln);background:var(--c);color:var(--ink);border-radius:12px;padding:9px 12px;margin:3px}
+.pri{background:var(--p);color:#fff;border-color:var(--p)}.ok{background:var(--gl)!important;border-color:var(--g)}.no{background:var(--rl)!important;border-color:var(--r)}
+.hint{background:var(--al)}.tag{display:inline-block;background:var(--pl);color:var(--p);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:700;margin:4px 0}
+.box{background:var(--pl);border-radius:12px;padding:10px;margin:8px 0}.big{font-size:40px;text-align:center}
+textarea{width:100%;min-height:70px;border:1px solid var(--ln);border-radius:12px;padding:8px;background:var(--c);color:var(--ink);font:inherit;box-sizing:border-box}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}.grid2 button{margin:0}
+#rt{height:110px;border-radius:14px;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--p);margin:8px 0;cursor:pointer;user-select:none;text-align:center;padding:6px}
+footer{text-align:center;color:var(--mu);font-size:12px;padding:12px}
+</style>
+</head>
+<body>
+<div class="w">
+<header><h1>🔬 معمل الخلية وأجهزة الجسم</h1><div class="bar"><span>⭐ النقاط: <b id="pts">0</b></span><span>✅ المحطات: <b id="prog">0</b></span></div></header>
+<div id="list"></div>
+<footer>تصميم المعلمة سامية الشهري · علوم سادس ابتدائي</footer>
+</div>
+<script>
+const S=[
+{i:"🔬",t:"الخلية",l:"الفصل الأول: الخلايا",v:"🔬🧫🌿🐾",
+d:[["أي جزء يتحكم في أنشطة الخلية؟",["النواة","الجدار الخلوي","الفجوة"]],["أي جزء تنفرد به الخلية النباتية؟",["الجدار الخلوي","الغشاء الخلوي","السيتوبلازم"]]],
+k:"الخلية وحدة البناء الأساسية في المخلوقات الحية. تتحكم النواة في أنشطتها، وينظم الغشاء الخلوي دخول المواد وخروجها، وتنفرد الخلية النباتية بالجدار الخلوي والبلاستيدات الخضراء.",
+e:"الخلية الحيوانية لا تصنع غذاءها، فتحصل عليه من الغذاء الذي يتناوله المخلوق.",
+a:[{y:"m",t:"صلي كل جزء بوظيفته",p:[["النواة","تتحكم في أنشطة الخلية"],["الغشاء الخلوي","ينظم دخول المواد وخروجها"],["الجدار الخلوي","يدعم الخلية النباتية"],["البلاستيدات","تصنع الغذاء بالبناء الضوئي"]]}],
+q:"فكّري: لو فقدت خلايا ورقة نبات جدرانها الخلوية فماذا يحدث لشكل الورقة؟ فسّري.",h:"ابدئي بجملة: ستفقد الورقة صلابتها لأن الجدار...",m:"تفقد الورقة صلابتها وتذبل لأن الجدار الخلوي يدعم الخلية ويحافظ على شكلها."},
+{i:"🔄",t:"انقسام الخلايا",l:"الفصل الثاني — الدرس الأول",v:"🔬➡️🧫🧫",
+d:[["ماذا ينتج عن انقسام خلية واحدة؟",["خليتان جديدتان","خلية أكبر فقط","نواة فقط"]],["لماذا تنقسم الخلايا؟",["لينمو الجسم وتُعوَّض الخلايا التالفة","ليتوقف النمو","لتختفي الأعضاء"]]],
+k:"تنقسم الخلية لينمو المخلوق ولتعويض الخلايا التالفة. تتضاعف المادة الوراثية داخل النواة، ثم تنقسم النواة، ثم ينقسم السيتوبلازم فتتكون خليتان جديدتان متطابقتان.",
+e:"إذا حدث خلل في دورة الخلية قد تنقسم الخلايا بلا ضبط، وهذا ما يحدث في مرض السرطان.",
+a:[{y:"s",t:"رتّبي خطوات انقسام الخلية",s:["تتضاعف المادة الوراثية","تنقسم النواة إلى نواتين","ينقسم السيتوبلازم","تتكون خليتان جديدتان"]}],
+q:"فكّري: كيف يفسّر انقسام الخلايا التئام الجرح؟ وماذا قد يحدث لو لم يتوقف الانقسام عند الحاجة؟",h:"فكّري: من أين تأتي الخلايا التي تسدّ الجرح؟",m:"تنقسم الخلايا السليمة حول الجرح فتعوّض التالف. ولو لم يتوقف الانقسام لتكاثرت الخلايا بلا ضبط كما في السرطان."},
+{i:"🧬",t:"الوراثة والصفات",l:"الفصل الثاني — الدرس الثاني",v:"🧬👨‍👩‍👧👀",
+d:[["أي مما يلي صفة موروثة؟",["لون العينين","ندبة في اليد","ركوب الدراجة"]],["كيف تنتقل الصفات الموروثة؟",["عبر المادة الوراثية من الآباء إلى الأبناء","بالتدريب","بالغذاء"]]],
+k:"الصفات الموروثة تنتقل من الآباء إلى الأبناء عبر المادة الوراثية، مثل لون العينين. أما الصفات المكتسبة فيتعلمها الإنسان أو تحدث له خلال حياته، مثل ركوب الدراجة.",
+e:"تُستخدم الوراثة في تحسين المنتجات الزراعية بانتقاء النباتات ذات الصفات الجيدة وزراعة بذورها.",
+a:[{y:"c",t:"صنّفي الصفة",b:["موروثة","مكتسبة"],i:[["👀","لون العينين",0],["🚴","ركوب الدراجة",1],["🧑🏽","لون البشرة",0],["📖","القراءة",1],["🩹","ندبة جرح",1],["💇","نوع الشعر (مجعد أو مستقيم)",0]]}],
+q:"فكّري: مزارع يريد قمحاً أكثر إنتاجاً. كيف يستفيد من الوراثة؟ وهل تنتقل زيادة الحجم الناتجة عن التسميد إلى البذور؟ لماذا؟",h:"فرّقي بين صفة تنتقل بالمادة الوراثية وصفة سببها البيئة.",m:"ينتقي نباتات القمح الأعلى إنتاجاً ويزرع بذورها لتنتقل الصفة. أما زيادة الحجم بسبب التسميد فصفة مكتسبة من البيئة ولا تنتقل بالبذور."},
+{i:"🫀",t:"الهضم والإخراج والتنفس والدوران",l:"الفصل الرابع — الدرس الأول",v:"🍽️🫁🫀",
+d:[["أين يُمتص معظم الغذاء المهضوم؟",["الأمعاء الدقيقة","المريء","الفم"]],["ما وظيفة القلب؟",["ضخ الدم في الجسم","هضم الطعام","تبادل الغازات"]]],
+k:"يهضم الجسم الطعام ليتحول إلى مواد صغيرة تمتصها الأمعاء الدقيقة ويحملها الدم. وتزوّد الرئتان الدم بالأكسجين وتخلّصانه من ثاني أكسيد الكربون، ويضخ القلب الدم في الأوعية الدموية، وتتخلص الكليتان من الفضلات السائلة.",
+e:"الشعيرات الدموية أصغر الأوعية حجماً، وجدرانها رقيقة تسمح بتبادل المواد بين الدم والخلايا.",
+a:[{y:"s",t:"رتّبي مسار الطعام",s:["الفم","المريء","المعدة","الأمعاء الدقيقة","الأمعاء الغليظة"]},{y:"m",t:"صلي العضو بوظيفته",p:[["القلب","يضخ الدم في الجسم"],["الرئتان","تبادل الأكسجين وثاني أكسيد الكربون"],["الكليتان","تتخلصان من الفضلات السائلة"],["الأمعاء الدقيقة","امتصاص الغذاء المهضوم"]]}],
+q:"فكّري: لماذا تكون جدران الشعيرات الدموية رقيقة وقطرها صغير جداً بينما الشريان الكبير سميك؟ ماذا لو كانت الشعيرات سميكة؟",h:"تذكّري أين يتبادل الدم المواد مع الخلايا.",m:"رقة الشعيرات تسمح بانتقال الأكسجين والغذاء إلى الخلايا وأخذ الفضلات منها. أما الشرايين الكبيرة فسميكة لتتحمل ضغط الدم الخارج من القلب. ولو كانت الشعيرات سميكة لصعب التبادل."},
+{i:"🧠",t:"الحركة والإحساس",l:"الفصل الرابع — الدرس الثاني",v:"🦴💪👁️👂🧠",
+d:[["ما الذي ينقل الرسائل من الحواس إلى الدماغ؟",["الأعصاب","العظام","المعدة"]],["أي جهازين يعملان معاً لتحريك الجسم؟",["الهيكلي والعضلي","الهضمي والتنفسي","الدوراني فقط"]]],
+k:"تستقبل الحواس المنبهات من البيئة وتنقلها الأعصاب إلى الدماغ الذي يصدر الاستجابة. ويتكامل الجهاز العضلي مع الهيكلي في الحركة، إذ تشدّ العضلات العظام فيتحرك الجسم عند المفاصل.",
+e:"العضلات تتحرك بالتقلص فقط، لذلك تعمل في أزواج: عضلة تشدّ، والأخرى تعيد العظم لوضعه.",
+a:[{y:"r",t:"اختبار زمن رد الفعل"},{y:"m",t:"صلي العضو بحاسّته",p:[["العين","الإبصار"],["الأذن","السمع"],["الجلد","اللمس"],["اللسان","التذوق"]]}],
+q:"فكّري: لماذا يتأخر رد فعلك عند التعب أو قلة النوم؟ اقترحي عادتين تحافظين بهما على صحة حواسك وجهازك العصبي.",h:"الدماغ يستقبل الرسالة ثم يرسل الاستجابة؛ ماذا لو كان متعباً؟",m:"عند التعب يتأخر الدماغ في معالجة الرسائل وإرسال الاستجابة. من العادات: النوم الكافي، وحماية العينين والأذنين من الضوء والصوت العالي، وارتداء الخوذة."},
+{i:"🏃‍♀️",t:"تكامل أجهزة الجسم",l:"ربط الفصل الرابع",v:"🏃‍♀️🫀🫁🦴🧠",
+d:[["ماذا يحدث لنبض القلب أثناء الجري؟",["يزداد","يقل","يتوقف"]],["لماذا يزداد التنفس أثناء الجري؟",["لتزويد العضلات بأكسجين أكثر","لتبريد المعدة","لأن العظام تحتاجه"]]],
+k:"لا يعمل جهاز بمفرده: الأعصاب تنسق الحركة، والعضلات والعظام تحرك الجسم، والرئتان تزوّدان الدم بالأكسجين، والقلب يضخه إلى العضلات، والهضم يمدّها بالطاقة.",
+e:"عند الجهد تحتاج العضلات طاقة أكبر، فيزداد النبض والتنفس معاً لتوصيل الأكسجين والغذاء أسرع.",
+a:[{y:"h",t:"جرّبي: مستوى النشاط"},{y:"m",t:"صلي الجهاز بدوره أثناء الجري",p:[["العضلات والعظام","تحرك الجسم"],["الرئتان","تزوّدان الدم بالأكسجين"],["القلب والأوعية","تنقل الأكسجين للعضلات"],["الأعصاب والدماغ","تنسق الحركة وتستجيب"]]}],
+q:"فكّري: أصيبت لاعبة بكسر في ساقها. كيف يتأثر عمل جهازين آخرين غير الهيكلي؟ فسّري.",h:"تذكّري أن الأجهزة تتكامل في الحركة.",m:"يتأثر العصبي بنقل الألم وتعطّل التنسيق، ويتأثر العضلي لعدم قدرة العضلات على تحريك العظم المكسور، وقد يقل النشاط فيتغير عمل القلب والتنفس."}
+];
+const $=id=>document.getElementById(id);
+let st={};try{st=JSON.parse(localStorage.getItem("bl1"))||{}}catch(e){}
+st.pts=st.pts||0;st.done=st.done||{};st.tr=st.tr||{};
+let open=null,step={},cur={};
+const save=()=>{try{localStorage.setItem("bl1",JSON.stringify(st))}catch(e){}};
+const add=n=>{st.pts+=n;save();$("pts").textContent=st.pts};
+const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const speak=t=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";speechSynthesis.speak(u)}catch(e){}};
+function B(t,f,c){const b=document.createElement("button");b.textContent=t;b.onclick=f;if(c)b.className=c;return b}
+function fl(b){b.classList.add("no");setTimeout(()=>b.classList.remove("no"),500)}
+function pulse(t){t.classList.add("hint");setTimeout(()=>t.classList.remove("hint"),1500)}
+function render(){
+ $("pts").textContent=st.pts;$("prog").textContent=Object.keys(st.done).length+" / "+S.length;
+ $("list").innerHTML=S.map((s,i)=>`<div class="card"><div class="hd" onclick="tog(${i})"><span style="font-size:28px">${s.i}</span><span>${s.t}<small>${s.l}</small></span><span style="margin-right:auto">${st.done[i]?"✅":open===i?"▾":"◂"}</span></div>${open===i?'<div class="bd" id="bd"></div>':""}</div>`).join("");
+ if(open!==null)V(open)}
+function tog(i){open=open===i?null:i;step[i]=0;render()}
+function V(i){
+ const s=S[i],b=$("bd"),p=step[i],tr=st.tr[i]||"r";b.innerHTML="";
+ const H=x=>{const d=document.createElement("div");d.innerHTML=x;b.appendChild(d);return d};
+ const nx=()=>b.appendChild(B("التالي ◂",()=>{step[i]++;V(i)},"pri"));
+ const T=()=>{const d=H(`<span class="tag">${tr=="e"?"🚀 مسار إثرائي":"🌱 مسار علاجي"}</span>`);d.appendChild(B("🔄 غيّري المسار",()=>{st.tr[i]=tr=="e"?"r":"e";save();V(i)}))};
+ if(p==0){cur.a=[];H('<span class="tag">1 · اختبار قصير</span>');
+  s.d.forEach((d,q)=>{const w=H(`<b>${d[0]}</b><br>`);shuf(d[1].map((t,j)=>[t,j==0])).forEach(([t,ok])=>w.appendChild(B(t,e=>{cur.a[q]=ok;w.querySelectorAll("button").forEach(x=>x.className="");e.target.className="pri"})))});
+  b.appendChild(B("ابدئي المحطة ◂",()=>{if(!s.d.every((d,q)=>cur.a[q]!=null))return;st.tr[i]=cur.a.every(Boolean)?"e":"r";save();step[i]=1;V(i)},"pri"))}
+ else if(p==1){T();H(`<span class="tag">2 · شاهدي واستمعي</span><div class="big">${s.v}</div><div class="box">${s.k}</div>${tr=="e"?`<div class="box hint">🚀 للمتقدمات: ${s.e}</div>`:""}`);b.appendChild(B("🔊 اقرئي لي",()=>speak(s.k+(tr=="e"?s.e:""))));nx()}
+ else if(p==2){T();H('<span class="tag">3 · جرّبي بنفسك</span>');let n=0;
+  const fin=pt=>{add(pt+(tr=="e"?1:0));if(++n==s.a.length)nx()};
+  s.a.forEach(a=>{const d=H("");d.className="box";({m:match,s:seq,c:cls,r:rt,h:hr})[a.y](d,a,fin,tr=="r")})}
+ else{T();H(`<span class="tag">4 · فكّري</span><div class="big">💭</div><b>${s.q}</b>${tr=="r"?`<div class="box hint">💡 ${s.h}</div>`:""}<textarea placeholder="اكتبي إجابتك هنا"></textarea>`);
+  const m=H(`<div class="box ok">✅ إجابة نموذجية: ${s.m}</div>`);m.style.display="none";
+  b.appendChild(B("اعرضي الإجابة النموذجية",()=>m.style.display="block"));
+  b.appendChild(B("أنجزتُ المحطة ⭐ +5",()=>{if(!st.done[i]){st.done[i]=1;add(5)}open=null;render()},"pri"))}}
+function match(el,c,fin,hn){let sel=null,ok=0,er=0;el.innerHTML=`<b>${c.t}</b>`;const g=document.createElement("div");g.className="grid2";const L=document.createElement("div"),R=document.createElement("div");g.append(L,R);el.appendChild(g);
+ c.p.forEach((p,k)=>{const b=B(p[0],()=>{if(b.locked)return;L.querySelectorAll("button").forEach(x=>x.classList.remove("pri"));sel={k,b};b.classList.add("pri")});L.appendChild(b)});
+ shuf(c.p.map((p,k)=>k)).forEach(k=>{const b=B(c.p[k][1],()=>{if(!sel||b.locked)return;if(sel.k==k){sel.b.classList.remove("pri");sel.b.classList.add("ok");b.classList.add("ok");sel.b.locked=b.locked=1;sel=null;if(++ok==c.p.length)fin(Math.max(1,3-er))}else{er++;fl(b)}});b.dataset.k=k;R.appendChild(b)});
+ if(hn)el.appendChild(B("💡 تلميح",()=>{if(sel)pulse(R.querySelector(`[data-k="${sel.k}"]`))},"hint"))}
+function seq(el,c,fin,hn){let o=0,er=0;el.innerHTML=`<b>${c.t}</b>`;const ol=document.createElement("ol"),w=document.createElement("div");el.append(ol,w);
+ shuf(c.s.map((t,k)=>k)).forEach(k=>{const b=B(c.s[k],()=>{if(k==o){const li=document.createElement("li");li.textContent=c.s[k];ol.appendChild(li);b.remove();if(++o==c.s.length)fin(Math.max(1,3-er))}else{er++;fl(b)}});b.dataset.k=k;w.appendChild(b)});
+ if(hn)el.appendChild(B("💡 تلميح",()=>{const t=w.querySelector(`[data-k="${o}"]`);if(t)pulse(t)},"hint"))}
+function cls(el,c,fin){let k=0,er=0;const q=shuf(c.i.slice());
+ const go=()=>{if(k>=q.length){el.innerHTML=`<b>${c.t}</b><div class="big">🎉</div>`;fin(Math.max(1,3-er));return}
+  const x=q[k];el.innerHTML=`<b>${c.t}</b><div class="big">${x[0]}</div><p style="text-align:center">${x[1]}</p>`;const w=document.createElement("div");w.className="grid2";
+  c.b.forEach((n,j)=>w.appendChild(B(n,e=>{if(j==x[2]){k++;go()}else{er++;fl(e.target)}})));el.appendChild(w)};go()}
+function rt(el,c,fin){let t0=0,tm,n=0,best=9e9,s=0;el.innerHTML=`<b>${c.t}</b><p>اضغطي على المربع عندما يتحول إلى الأخضر. جرّبي 3 مرات.</p>`;
+ const d=document.createElement("div");d.id="rt";d.textContent="اضغطي للبدء";el.appendChild(d);
+ d.onclick=()=>{if(s==0){s=1;d.style.background="#d64d68";d.textContent="انتظري…";tm=setTimeout(()=>{s=2;t0=performance.now();d.style.background="#15966b";d.textContent="اضغطي الآن!"},1500+Math.random()*2500)}
+  else if(s==1){clearTimeout(tm);s=0;d.style.background="";d.textContent="ضغطتِ مبكراً! اضغطي للمحاولة"}
+  else{const ms=Math.round(performance.now()-t0);best=Math.min(best,ms);s=0;d.style.background="";d.textContent=ms+" ميلي ثانية، اضغطي للمحاولة";if(++n==3){d.textContent="أفضل نتيجة: "+best+" ميلي ثانية (المعتاد بين 200 و300)";d.onclick=null;fin(2)}}}}
+function hr(el,c,fin){const D=[["🪑 راحة",70,16],["🚶 مشي",95,22],["🏃 جري",150,40]],seen=new Set();el.innerHTML=`<b>${c.t}</b><br>`;const o=document.createElement("div");o.className="box";o.textContent="اختاري نشاطاً لترى الأثر (قيم تقريبية)";
+ D.forEach(([n,h,r],j)=>el.appendChild(B(n,()=>{o.innerHTML=`🫀 النبض: <b>${h}</b> نبضة/د<div style="background:var(--p);height:8px;border-radius:8px;width:${h/1.6}%"></div>🫁 التنفس: <b>${r}</b> مرة/د<div style="background:var(--g);height:8px;border-radius:8px;width:${r*2}%"></div>`;seen.add(j);if(seen.size==3)fin(2)})));el.appendChild(o)}
+render();
+</script>
+</body>
+</html>
