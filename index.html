@@ -609,6 +609,20 @@ button { cursor: pointer; border: 0; }
 </div>
 
 <!-- User Guide Modal -->
+<div class="modal-backdrop" id="reportModal" role="dialog" aria-hidden="true">
+  <div class="modal">
+    <h2>📋 تقرير الطالبة</h2>
+    <label for="repName">اسمك:</label>
+    <input id="repName" placeholder="اكتبي اسمك هنا...">
+    <pre id="repText" style="white-space:pre-wrap;font-family:inherit;font-size:13.5px;background:rgba(118,87,232,.1);border-radius:12px;padding:10px;margin:10px 0"></pre>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="repWa">📲 إرسال إلى المعلمة</button>
+      <button class="btn btn-soft" id="repCopy">📄 نسخ التقرير</button>
+      <button class="btn btn-soft" id="repClose">✕ إغلاق</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-backdrop" id="guideModal" role="dialog" aria-hidden="true">
   <div class="modal">
     <h2>📖 دليل استخدام المعمل الرقمي</h2>
@@ -665,7 +679,7 @@ button { cursor: pointer; border: 0; }
       </div>
       <div style="display:flex; gap:10px; align-items:center;">
         <button class="btn btn-light btn-sm" id="soundToggleBtn">🔊 الصوت: مفعل</button>
-        <button class="btn btn-light btn-sm" id="labModeBtn">👥 الوضع</button><button class="btn btn-light btn-sm" id="labGuideBtn">📖 الدليل</button>
+        <button class="btn btn-light btn-sm" id="labModeBtn">👥 الوضع</button><button class="btn btn-light btn-sm" id="labGuideBtn">📖 الدليل</button><button class="btn btn-light btn-sm" id="labReportBtn">📋 تقريري</button>
       </div>
     </div>
 
@@ -1473,6 +1487,40 @@ function renderBadges() {
     </ul>
   `;
 }
+
+/* Student report (WhatsApp / copy) */
+const TEACHER_PHONE = ""; // رقم المعلمة بصيغة دولية بدون + مثل 9665XXXXXXXX
+function repName(){ const v = $("repName").value.trim(); return v; }
+function buildReport(){
+  const n = repName() || "(لم تكتب اسمها)";
+  return "تقرير معمل الشبكات الغذائية\nالطالبة: " + n + "\nالتاريخ: " + new Date().toLocaleDateString("ar-SA") +
+    "\nالنقاط: " + userPoints +
+    "\nالعلاقات الغذائية المرسومة: " + activeEdges.length + " من " + VALID.size +
+    "\nالتحديات المنجزة: " + currentChallengeIndex + " من " + CHALLENGES.length +
+    "\nأسئلة نافس المجابة: " + Object.keys(quizAnswers).length + " من " + QUIZ_QUESTIONS.length +
+    "\nالشارات: " + unlockedBadges.size + " من 4" +
+    "\nالمدرسة الابتدائية السابعة والأربعون";
+}
+function refreshReport(){ $("repText").textContent = buildReport(); }
+$("labReportBtn").onclick = () => {
+  $("repName").value = studentName !== "طالبة العلوم" ? studentName : "";
+  refreshReport(); $("reportModal").classList.add("show");
+};
+$("repName").oninput = () => {
+  studentName = repName() || "طالبة العلوم"; saveToStorage("scienceLabStudent", studentName);
+  refreshReport(); updateStatsDisplay();
+};
+$("repClose").onclick = () => $("reportModal").classList.remove("show");
+$("reportModal").onclick = (e) => { if (e.target.id === "reportModal") $("reportModal").classList.remove("show"); };
+$("repWa").onclick = () => {
+  if (!repName()) { showToast("اكتبي اسمك أولاً"); $("repName").focus(); return; }
+  window.open("https://wa.me/" + TEACHER_PHONE + "?text=" + encodeURIComponent(buildReport()), "_blank");
+};
+$("repCopy").onclick = () => {
+  if (!repName()) { showToast("اكتبي اسمك أولاً"); $("repName").focus(); return; }
+  try { navigator.clipboard.writeText(buildReport()).then(() => showToast("تم نسخ التقرير")); }
+  catch(e) { showToast("تعذّر النسخ، التقطي صورة للشاشة"); }
+};
 
 /* App Initialization */
 window.addEventListener("resize", drawNetwork);
